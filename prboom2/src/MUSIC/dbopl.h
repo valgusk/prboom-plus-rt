@@ -17,7 +17,7 @@
  */
 
 //#include "inttypes.h" //NSM
-#include "SDL_stdinc.h"
+#include "SDL2/SDL_stdinc.h"
 
 #ifdef _MSC_VER
   #if _MSC_VER < 1300

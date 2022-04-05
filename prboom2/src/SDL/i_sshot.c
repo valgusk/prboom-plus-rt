@@ -38,7 +38,7 @@
 
 #include <stdlib.h>
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 #ifdef HAVE_LIBSDL2_IMAGE
 #include <SDL_image.h>

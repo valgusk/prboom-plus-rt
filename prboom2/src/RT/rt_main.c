@@ -26,7 +26,7 @@
 
 #include "rt_main.h"
 
-#include <SDL_timer.h>
+#include <SDL2/SDL_timer.h>
 #include <GL/glu.h>
 
 #include "doomstat.h"
@@ -51,20 +51,21 @@ static void RT_Print(const char *pMessage, void *pUserData)
 }
 
 
-void RT_Init(HINSTANCE hinstance, HWND hwnd)
+void RT_Init(Display* display, Window hwnd)
 {
-  RgWin32SurfaceCreateInfo win32Info =
+  RgXlibSurfaceCreateInfo pXlibSurfaceCreateInfo =
   {
-    .hinstance = hinstance,
-    .hwnd = hwnd
+    .dpy = display,
+    .window = hwnd
   };
+
 
   RgInstanceCreateInfo info =
   {
     .pAppName = "PRBoom",
     .pAppGUID = "297e3cc1-4076-4a60-ac7c-5904c5db1313",
 
-    .pWin32SurfaceInfo = &win32Info,
+    .pXlibSurfaceCreateInfo = &pXlibSurfaceCreateInfo,
 
   #ifndef NDEBUG
     .enableValidationLayer = true,
@@ -112,6 +113,7 @@ void RT_Init(HINSTANCE hinstance, HWND hwnd)
   }
 
   rtmain.hwnd = hwnd;
+  rtmain.display = display;
 
 
 #ifndef NDEBUG
@@ -192,14 +194,17 @@ double RT_GetCurrentTime(void)
 
 static RgExtent2D GetCurrentHWNDSize()
 {
-  RgExtent2D extent = { 0,0 };
+  RgExtent2D extent = { 853, 480 };
 
-  RECT rect;
-  if (GetClientRect(rtmain.hwnd, &rect))
-  {
-    extent.width = rect.right - rect.left;
-    extent.height = rect.bottom - rect.top;
-  }
+  // XWindowAttributes attrs;
+  // XGetWindowAttributes(rtmain.display, rtmain.hwnd, &attrs);
+
+  // RECT rect;
+  // if (GetClientRect(rtmain.hwnd, &rect))
+  // {
+  //   extent.width = rect.right - rect.left;
+  //   extent.height = rect.bottom - rect.top;
+  // }
 
   assert(extent.width > 0 && extent.height > 0);
   return extent;
@@ -215,6 +220,9 @@ static dboolean IsCRTModeEnabled(rt_settings_renderscale_e renderscale)
 static RgExtent2D GetScaledResolution(rt_settings_renderscale_e renderscale)
 {
   RgExtent2D window_size = GetCurrentHWNDSize();
+  // window_size.width = 640;
+  // window_size.height = 480;
+
   double window_aspect = (double)window_size.width / (double)window_size.height;
 
   int y = SCREENHEIGHT;
@@ -317,12 +325,12 @@ static void NormalizeRTSettings(rt_settings_t *settings)
       if ((int)window_size.height >= rs_height[i])
       {
         // next after closest
-        max_allowed = min(i + 1, RT_SETTINGS_RENDERSCALE_NUM - 1);
+        max_allowed = MIN(i + 1, RT_SETTINGS_RENDERSCALE_NUM - 1);
         break;
       }
     }
 
-    settings->renderscale = min(settings->renderscale, max_allowed);
+    settings->renderscale = MIN(settings->renderscale, max_allowed);
   }
 }
 

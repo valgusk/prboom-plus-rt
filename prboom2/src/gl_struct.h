@@ -34,7 +34,7 @@
 #ifndef _GL_STRUCT_H
 #define _GL_STRUCT_H
 
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 
 extern int nodesVersion;
 

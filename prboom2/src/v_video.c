@@ -38,7 +38,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 #include "doomdef.h"
 #include "doomstat.h"

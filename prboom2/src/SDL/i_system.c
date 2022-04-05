@@ -57,7 +57,7 @@
 #endif
 #include <sys/stat.h>
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -519,8 +519,11 @@ char* I_FindFileInternal(const char* wfname, const char* ext, dboolean isStatic)
                              s ? s : "", (s && !HasTrailingSlash(s)) ? "/" : "",
                              wfname);
 
-    if (ext && access(p,F_OK))
-      strcat(p, ext);
+    if (ext && access(p,F_OK)) {
+      // strcat(p, ext);
+
+      lprintf(LO_INFO, "PEW: searching: %s in %s\n", wfname, p);
+    }
     if (!access(p,F_OK)) {
       if (!isStatic)
         lprintf(LO_INFO, " found %s\n", p);

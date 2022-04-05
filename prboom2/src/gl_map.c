@@ -33,9 +33,9 @@
 
 #include <math.h>
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #ifdef HAVE_LIBSDL2_IMAGE
-#include "SDL_image.h"
+#include "SDL2/SDL_image.h"
 #endif
 
 #include "gl_opengl.h"

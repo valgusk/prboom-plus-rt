@@ -37,7 +37,7 @@
 
 #include <stdlib.h>
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include "doomdef.h"
 #include "doomtype.h"
 #include "m_argv.h"

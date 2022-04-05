@@ -36,7 +36,8 @@
 typedef struct
 {
   RgInstance instance;
-  HWND hwnd;
+  Window hwnd;
+  Display* display;
 
   float mat_view[4][4];
   float mat_projectionvk[4][4];
@@ -69,7 +70,7 @@ typedef struct
 extern rtmain_t rtmain;
 
 
-void RT_Init(HINSTANCE hinstance, HWND hwnd);
+void RT_Init(Display* display, Window hwnd);
 void RT_Destroy(void);
 
 void RT_StartFrame(void);

@@ -43,17 +43,17 @@
 #define HAVE_MIXER
 #endif
 
-#include "SDL.h"
-#include "SDL_audio.h"
-#include "SDL_mutex.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_audio.h"
+#include "SDL2/SDL_mutex.h"
 
-#include "SDL_endian.h"
+#include "SDL2/SDL_endian.h"
 
-#include "SDL_version.h"
-#include "SDL_thread.h"
+#include "SDL2/SDL_version.h"
+#include "SDL2/SDL_thread.h"
 #ifdef HAVE_MIXER
 #define USE_RWOPS
-#include "SDL_mixer.h"
+#include "SDL2/SDL_mixer.h"
 #endif
 
 #include "z_zone.h"
@@ -1317,7 +1317,7 @@ char music_player_order[NUM_MUS_PLAYERS][200] =
 const char *snd_midiplayer;
 
 const char *midiplayers[midi_player_last + 1] = {
-  "sdl", "fluidsynth", "opl2", "portmidi", "alsa", NULL};
+  "SDL2/sdl", "fluidsynth", "opl2", "portmidi", "alsa", NULL};
 
 static int current_player = -1;
 static const void *music_handle = NULL;

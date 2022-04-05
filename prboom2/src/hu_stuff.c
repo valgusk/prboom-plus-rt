@@ -105,6 +105,10 @@ int hud_num;
 #define key_alt KEYD_RALT
 #define key_shift KEYD_RSHIFT
 
+// #define ARRAYSIZE(a) \
+//   ((sizeof(a) / sizeof(*(a))) / \
+//   static_cast<size_t>(!(sizeof(a) % sizeof(*(a)))))
+
 const char* chat_macros[] =
 // Ty 03/27/98 - *not* externalized
 // CPhipps - const char*
@@ -1160,7 +1164,7 @@ void HU_LoadHUDDefs(void)
   list->items = NULL;
   list->count = 0;
 
-  for (int c = 0; c < (int)ARRAYSIZE(all_cfg_items); c++)
+  for (int c = 0; c < 8; c++)
   {
     // hud_widget x y
     for (int i = 0; hud_name_widget[i].name; i++)

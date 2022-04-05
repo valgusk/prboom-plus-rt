@@ -166,9 +166,9 @@ static int fl_init (int samplerate)
   // gain control
   FSET (num, "synth.gain", mus_fluidsynth_gain / 100.0); // 0.0 - 0.2 - 10.0
   // behavior wrt bank select messages
-  FSET (str, "synth-midi-bank-select", "gm"); // general midi mode
+  // FSET (str, "synth-midi-bank-select", "gm"); // general midi mode
   // general midi spec says no more than 24 voices needed
-  FSET (int, "synth-polyphony", 24);
+  // FSET (int, "synth-polyphony", 24);
 
   // we're not using the builtin shell or builtin midiplayer,
   // and our own access to the synth is protected by mutex in i_sound.c
@@ -195,7 +195,7 @@ static int fl_init (int samplerate)
 
   if (f_font == FLUID_FAILED)
   {
-    lprintf (LO_WARN, "fl_init: error loading soundfont %s\n", snd_soundfont);
+    lprintf (LO_WARN, "fl_init: error loading soundfont %s: %s\n", snd_soundfont, filename);
     delete_fluid_synth (f_syn);
     delete_fluid_settings (f_set);
     return 0;

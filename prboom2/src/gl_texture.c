@@ -49,7 +49,7 @@
 #endif
 #include <stdio.h>
 #include <string.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "doomtype.h"
 #include "w_wad.h"
 #include "m_argv.h"

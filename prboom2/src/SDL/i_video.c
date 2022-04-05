@@ -49,11 +49,9 @@
 #include <unistd.h>
 #endif
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 //e6y
-#ifdef _WIN32
-#include <SDL_syswm.h>
-#endif
+#include "SDL2/SDL_syswm.h"
 
 #include "m_argv.h"
 #include "doomstat.h"
@@ -1495,18 +1493,20 @@ void I_UpdateVideoMode(void)
 
   if (V_GetMode() == VID_MODERT)
   {
+    // POI https://wiki.libsdl.org/SDL_SysWMinfo
+    // https://cpp.hotexamples.com/examples/-/-/vkCreateXlibSurfaceKHR/cpp-vkcreatexlibsurfacekhr-function-examples.html
     // get raw WinAPI handles from SDL
-    HINSTANCE hinstance;
-    HWND hwnd;
+    Window hwnd;
+    Display* display;
     {
       SDL_SysWMinfo wmInfo;
       SDL_VERSION(&wmInfo.version);
       SDL_GetWindowWMInfo(sdl_window, &wmInfo);
-      hwnd = wmInfo.info.win.window;
-      hinstance = wmInfo.info.win.hinstance;
+      hwnd = wmInfo.info.x11.window;
+      display = wmInfo.info.x11.display;
     }
 
-    RT_Init(hinstance, hwnd);
+    RT_Init(display, hwnd);
 
     M_ChangeFOV();
     deh_changeCompTranslucency();

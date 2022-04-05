@@ -38,10 +38,10 @@
 #include "gl_opengl.h"
 
 #include "z_zone.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef HAVE_LIBSDL2_IMAGE
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #endif
 
 #include <math.h>

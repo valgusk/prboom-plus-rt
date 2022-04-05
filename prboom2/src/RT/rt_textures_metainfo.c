@@ -210,7 +210,7 @@ void RT_TextureMetaInfo_Init(void)
         int c = sscanf(curr_line, "%s %f", name, &geom_emission);
         if (c == 2)
         {
-          geom_emission = max(geom_emission, 0.0f);
+          geom_emission = MAX(geom_emission, 0.0f);
           valid = true;
         }
         break;

@@ -4,6 +4,7 @@ Makefile
 cmake_install.cmake
 
 /build*
+/deps/
 /dependencies*
 /prboom2/ICONS/icons.aps
 /prboom2/ImportExecutables.cmake
@@ -19,4 +20,3 @@ cmake_install.cmake
 /prboom2/.vs/*
 /prboom2/out/*
 /prboom2/CMakeSettings.json
-/prboom2/external/*

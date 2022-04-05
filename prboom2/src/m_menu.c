@@ -331,7 +331,7 @@ void M_RT_ResolutionSettings_DLSS(void);
 void M_RT_ResolutionSettings_FSR(void);
 void M_RT_ResolutionSettings_RenderScale(void);
 void M_RT_ApplyHUD(void);
-void M_RT_UpdateGfxItems(void);
+// void M_RT_UpdateGfxItems(void);
 #endif
 
 
@@ -3814,15 +3814,6 @@ void M_ChangeFullScreen(void)
   V_ToggleFullscreen();
 }
 
-void M_ChangeVideoMode(void)
-{
-  V_ChangeScreenResolution();
-
-#if RT_CUSTOM_MENU
-  M_RT_UpdateGfxItems();
-#endif
-}
-
 void M_ChangeVsync(void)
 {
   // RT: with RT, vsync is just a param that is passed on frame start
@@ -4077,6 +4068,16 @@ static void M_RT_UpdateGfxItems(void)
 
   SetGfxItemEnabled(gfxset_vsync,       V_GetMode() == VID_MODERT || V_GetMode() == VID_MODEGL);
   SetGfxItemEnabled(gfxset_hudsize,     V_GetMode() == VID_MODERT || V_GetMode() == VID_MODEGL);
+}
+
+
+void M_ChangeVideoMode(void)
+{
+  V_ChangeScreenResolution();
+
+#if RT_CUSTOM_MENU
+  M_RT_UpdateGfxItems();
+#endif
 }
 
 // Copy of M_General, but with different M_SetupNextMenu

@@ -44,9 +44,9 @@
 #include <unistd.h>
 #endif
 #include <sys/stat.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #ifdef HAVE_LIBSDL2_IMAGE
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #endif
 #include "doomstat.h"
 #include "v_video.h"

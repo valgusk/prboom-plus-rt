@@ -39,7 +39,7 @@
 #include "config.h"
 #endif
 
-#include "SDL_timer.h"
+#include "SDL2/SDL_timer.h"
 
 #ifdef _MSC_VER
 #include <io.h>
@@ -403,7 +403,7 @@ void D_Display (fixed_t frac)
     R_RestoreInterpolations();
 
   #if RT_DISABLE_SMALL_VIEWPORTS
-    dboolean drawclassichud = RT_IsClassicHUDEnabled();
+    dboolean drawclassichud = true; //RT_IsClassicHUDEnabled();
   #else
     dboolean drawclassichud = viewheight != SCREENHEIGHT;
   #endif
@@ -842,9 +842,11 @@ void CheckIWAD(const char *iwadname,GameMode_t *gmode,dboolean *hassec)
         length = header.numlumps;
         fileinfo = malloc(length*sizeof(filelump_t));
         if (fseek (fp, header.infotableofs, SEEK_SET) ||
-            fread (fileinfo, sizeof(filelump_t), length, fp) != length ||
-            fclose(fp))
+            fread (fileinfo, sizeof(filelump_t), length, fp) != length)
+        {
+          fclose(fp);
           I_Error("CheckIWAD: failed to read directory %s",iwadname);
+        }
 
         // scan directory for levelname lumps
         while (length--)

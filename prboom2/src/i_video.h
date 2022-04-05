@@ -39,12 +39,12 @@
 #endif
 
 #ifdef GL_DOOM
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 #endif
 
 #include "doomtype.h"
 #include "v_video.h"
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 #ifdef __GNUG__
 #pragma interface

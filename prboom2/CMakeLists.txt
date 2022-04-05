@@ -4,6 +4,8 @@ project("PrBoom-Plus-RT"
     VERSION 2.6.1
     HOMEPAGE_URL "https://github.com/coelckers/prboom-plus")
 
+set(CXX_STANDARD_REQUIRED 11)
+
 # Set a default build type if none was specified
 set(default_build_type "RelWithDebInfo")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -16,8 +18,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-set(PRBOOM_EXTERNAL_FOLDER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/external")
 
 include(TargetArch)
 
@@ -81,13 +81,7 @@ if(BUILD_GL)
     find_package(OpenGL)
 endif()
 
-#find_package(SDL2 2.0.7 REQUIRED)
-    set( SDL2_LIBRARIES "${PRBOOM_EXTERNAL_FOLDER_PATH}/SDL2/SDL2.lib" )
-    set( SDL2_INCLUDE_DIR "${PRBOOM_EXTERNAL_FOLDER_PATH}/SDL2/include" )
-    set( SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIR}" )
-    set( SDL2_FOUND TRUE )
-#
-
+find_package(SDL2 2.0.7 REQUIRED)
 
 option(WITH_IMAGE "Use SDL2_image if available" OFF)
 if(WITH_IMAGE)
@@ -156,20 +150,9 @@ endif()
 
 option(WITH_VORBISFILE "Use vorbisfile if available" ON)
 if(WITH_VORBISFILE)
-    # find_package(Vorbis)
-        set( VORBISFILE_LIBRARY "${PRBOOM_EXTERNAL_FOLDER_PATH}/Vorbis/libvorbisfile.lib")
-        set( VORBIS_LIBRARY     "${PRBOOM_EXTERNAL_FOLDER_PATH}/Vorbis/libvorbis.lib" )
-        set( VORBIS_INCLUDE_DIR "${PRBOOM_EXTERNAL_FOLDER_PATH}/Vorbis/include" )
-
-        set( OGG_LIBRARIES      "${PRBOOM_EXTERNAL_FOLDER_PATH}/Ogg/libogg.lib" )
-        set( OGG_INCLUDE_DIRS   "${PRBOOM_EXTERNAL_FOLDER_PATH}/Ogg/include" )
-
-        set( VORBIS_LIBRARIES ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY} ${OGG_LIBRARIES} )
-        set( VORBIS_INCLUDE_DIRS ${VORBIS_INCLUDE_DIR} ${OGG_INCLUDE_DIRS} )
-        set( VORBIS_FOUND TRUE )
-    #
-
+    find_package(Vorbis)
     if(VORBIS_FOUND)
+        message(STATUS "Vorbis found")
         set(HAVE_LIBVORBISFILE TRUE)
     else()
       message(FATAL_ERROR "Vorbis is required (for playing .ogg files)")
@@ -222,8 +205,8 @@ if (MSVC)
 else()
     set(CMAKE_C_FLAGS
         "${CMAKE_C_FLAGS} \
-        -Wall -Wno-missing-field-initializers -Wwrite-strings -Wundef \
-        -Wbad-function-cast -Wcast-align -Wcast-qual -Wdeclaration-after-statement \
+        -Wall -Wno-missing-field-initializers -Wwrite-strings \
+        -Wbad-function-cast -Wcast-align -Wcast-qual \
         -Wpointer-arith -Wno-unused -Wno-switch -Wno-sign-compare -Wno-pointer-sign \
         -ffast-math"
     )
