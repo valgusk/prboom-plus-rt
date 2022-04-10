@@ -3,9 +3,10 @@ CMakeCache.txt
 Makefile
 cmake_install.cmake
 
+/install
 /build*
 /deps/
-/dependencies*
+# /dependencies*
 /prboom2/ICONS/icons.aps
 /prboom2/ImportExecutables.cmake
 /prboom2/release

@@ -1,0 +1,3 @@
+[submodule "dependencies/RayTracedGL1"]
+	path = dependencies/RayTracedGL1
+	url = https://github.com/valgusk/RayTracedGL1
