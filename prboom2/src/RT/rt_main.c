@@ -194,7 +194,13 @@ double RT_GetCurrentTime(void)
 
 static RgExtent2D GetCurrentHWNDSize()
 {
-  RgExtent2D extent = { 853, 480 };
+  RgExtent2D extent = { 0, 0 };
+
+  Window winDummy;
+  unsigned int xDummy, yDummy;
+  unsigned int borderDummy, depthDummy; 
+
+  XGetGeometry(rtmain.display, rtmain.hwnd, &winDummy, &xDummy, &yDummy, &extent.width, &extent.height, &borderDummy, &depthDummy);
 
   // XWindowAttributes attrs;
   // XGetWindowAttributes(rtmain.display, rtmain.hwnd, &attrs);

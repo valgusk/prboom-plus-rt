@@ -346,6 +346,9 @@ function(AddGameExecutable TARGET SOURCES)
     target_link_libraries(${TARGET} PRIVATE
         ${SDL2_LIBRARIES}
     )
+    target_link_libraries(${TARGET} PRIVATE
+        X11
+    )
     if(WIN32)
         target_link_libraries(${TARGET} PRIVATE
             winmm
